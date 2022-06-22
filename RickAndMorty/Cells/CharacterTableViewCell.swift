@@ -1,0 +1,28 @@
+//
+//  CharacterTableViewCell.swift
+//  RickAndMorty
+//
+//  Created by ULS on 22.06.2022.
+//
+
+import UIKit
+
+class CharacterTableViewCell: UITableViewCell {
+
+    @IBOutlet weak var characterImage: UIImageView!
+    @IBOutlet weak var episodeName: UILabel!
+    @IBOutlet weak var locationName: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
+    }
+    
+}
+
