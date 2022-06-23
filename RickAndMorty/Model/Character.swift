@@ -96,5 +96,3 @@ class Origin:Codable{
         case url = "url"
     }
 }
-
-

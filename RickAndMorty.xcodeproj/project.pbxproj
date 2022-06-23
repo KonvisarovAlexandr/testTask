@@ -25,6 +25,8 @@
 		3D875C8A28632DCB000F7DF3 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D875C8928632DCB000F7DF3 /* Location.swift */; };
 		3D875C8C28632DD6000F7DF3 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D875C8B28632DD6000F7DF3 /* Episode.swift */; };
 		3D875C8E2863423C000F7DF3 /* Extencions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D875C8D2863423C000F7DF3 /* Extencions.swift */; };
+		3D9C27A128644A6A00BD5A8E /* ImageCoreData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9C279F28644A6A00BD5A8E /* ImageCoreData+CoreDataClass.swift */; };
+		3D9C27A228644A6A00BD5A8E /* ImageCoreData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9C27A028644A6A00BD5A8E /* ImageCoreData+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +69,8 @@
 		3D875C8928632DCB000F7DF3 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		3D875C8B28632DD6000F7DF3 /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
 		3D875C8D2863423C000F7DF3 /* Extencions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extencions.swift; sourceTree = "<group>"; };
+		3D9C279F28644A6A00BD5A8E /* ImageCoreData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageCoreData+CoreDataClass.swift"; sourceTree = "<group>"; };
+		3D9C27A028644A6A00BD5A8E /* ImageCoreData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageCoreData+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +121,7 @@
 		3D875C44286311C4000F7DF3 /* RickAndMorty */ = {
 			isa = PBXGroup;
 			children = (
+				3D9C27982864484F00BD5A8E /* CoreData */,
 				3D875C82286316FB000F7DF3 /* ViewControllers */,
 				3D875C7F28631454000F7DF3 /* UIExtensions */,
 				3D875C7E2863144A000F7DF3 /* Network */,
@@ -128,7 +133,6 @@
 				3D875C51286311C5000F7DF3 /* Assets.xcassets */,
 				3D875C53286311C5000F7DF3 /* LaunchScreen.storyboard */,
 				3D875C56286311C5000F7DF3 /* Info.plist */,
-				3D875C4E286311C4000F7DF3 /* RickAndMorty.xcdatamodeld */,
 			);
 			path = RickAndMorty;
 			sourceTree = "<group>";
@@ -192,6 +196,16 @@
 				3D875C85286317A1000F7DF3 /* InitialViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		3D9C27982864484F00BD5A8E /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				3D9C279F28644A6A00BD5A8E /* ImageCoreData+CoreDataClass.swift */,
+				3D9C27A028644A6A00BD5A8E /* ImageCoreData+CoreDataProperties.swift */,
+				3D875C4E286311C4000F7DF3 /* RickAndMorty.xcdatamodeld */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -328,8 +342,10 @@
 			files = (
 				3D875C81286314F4000F7DF3 /* NetworkManager.swift in Sources */,
 				3D875C50286311C4000F7DF3 /* RickAndMorty.xcdatamodeld in Sources */,
+				3D9C27A228644A6A00BD5A8E /* ImageCoreData+CoreDataProperties.swift in Sources */,
 				3D875C7C28631443000F7DF3 /* CharacterTableViewCell.swift in Sources */,
 				3D875C46286311C4000F7DF3 /* AppDelegate.swift in Sources */,
+				3D9C27A128644A6A00BD5A8E /* ImageCoreData+CoreDataClass.swift in Sources */,
 				3D875C8E2863423C000F7DF3 /* Extencions.swift in Sources */,
 				3D875C8A28632DCB000F7DF3 /* Location.swift in Sources */,
 				3D875C8C28632DD6000F7DF3 /* Episode.swift in Sources */,
@@ -515,6 +531,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RickAndMorty/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = RickAndMorty;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -542,6 +559,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RickAndMorty/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = RickAndMorty;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

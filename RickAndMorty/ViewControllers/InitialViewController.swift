@@ -3,9 +3,16 @@
 //  RickAndMorty
 
 import UIKit
+import CoreData
 
 class InitialViewController: UIViewController ,UITableViewDelegate,UITableViewDataSource,Delegate{
     
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var images:[ImageCoreData] = []{
+        didSet{
+            self.saveData()
+        }
+    }
     @IBOutlet weak var tableViewContent: UITableView!
     
     var characterers:[Character] = []
@@ -19,6 +26,7 @@ class InitialViewController: UIViewController ,UITableViewDelegate,UITableViewDa
     var contentVC: ContentViewController? {
         get {
             let vc = contentViewController as? ContentViewController
+            vc?.parentVC = self
             vc?.delegate = self
             vc?.modalTransitionStyle = .crossDissolve
             vc?.modalPresentationStyle = .fullScreen
@@ -29,6 +37,7 @@ class InitialViewController: UIViewController ,UITableViewDelegate,UITableViewDa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.fetchData()
         NetworkManager.shared.getCharacters(url:"https://rickandmortyapi.com/api/character", page: page, completion: { responce in
             self.characterers = responce ?? []
             self.tableViewContent.delegate = self
@@ -39,7 +48,29 @@ class InitialViewController: UIViewController ,UITableViewDelegate,UITableViewDa
         tableViewContent.register(UINib(nibName: "CharacterTableViewCell", bundle: nil), forCellReuseIdentifier: "CharacterTableViewCell")
     }
     
+    func fetchData(){
+        do{
+            let fetchRequest: NSFetchRequest<ImageCoreData> = ImageCoreData.fetchRequest()
+            self.images = try context.fetch(fetchRequest)
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
     
+    func saveData(){
+        do{
+            try self.context.save()
+        } catch {
+            print("saving error")
+        }
+    }
+    
+    func addOneImageToCoreData(image:UIImage, id:Int){
+        let coreImage = ImageCoreData(context: context)
+        coreImage.image = image.convertImageToData()
+        coreImage.id = Int16(id)
+        self.images.append(coreImage)
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return characterers.count
@@ -60,11 +91,29 @@ class InitialViewController: UIViewController ,UITableViewDelegate,UITableViewDa
         })
     }
     
+    func checkIfImageIsInCoreDataAndSetIt(whereToSet: inout UIImageView?,characterWhichIdChecking:Character){
+        if images.contains(where: {$0.id == Int16(characterWhichIdChecking.id)}){
+            whereToSet?.image = UIImage(data: images[images.firstIndex(where: {$0.id == characterWhichIdChecking.id}) ?? 0].image ?? Data())
+        } else {
+            whereToSet?.loadImageUsingCache(withUrl: characterWhichIdChecking.image){ imageWhichWasGet in
+                self.addOneImageToCoreData(image: imageWhichWasGet ?? UIImage() , id: characterWhichIdChecking.id)
+            }
+        }
+
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CharacterTableViewCell") as! CharacterTableViewCell
         cell.nameLabel.text = self.characterers[indexPath.row].name
         cell.locationName.text = self.characterers[indexPath.row].location.name
-        cell.characterImage.loadImageUsingCache(withUrl: self.characterers[indexPath.row].image){}
+        checkIfImageIsInCoreDataAndSetIt(whereToSet: &cell.characterImage, characterWhichIdChecking: characterers[indexPath.row])
+//        if images.contains(where: {$0.id == Int16(characterers[indexPath.row].id)}){
+//            cell.characterImage.image = UIImage(data: images[images.firstIndex(where: {$0.id == characterers[indexPath.row].id}) ?? 0].image ?? Data())
+//        } else {
+//            cell.characterImage.loadImageUsingCache(withUrl: self.characterers[indexPath.row].image){_ in
+//                self.addOneImageToCoreData(image: cell.characterImage.image ?? UIImage() , id: self.characterers[indexPath.row].id)
+//            }
+//        }
         NetworkManager.shared.getOneEpizode(url:characterers[indexPath.row].episode.first ?? "", completion: { episodeName in
             cell.episodeName.text = episodeName?.name
         })

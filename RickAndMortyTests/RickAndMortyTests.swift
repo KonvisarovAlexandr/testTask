@@ -2,8 +2,7 @@
 //  RickAndMortyTests.swift
 //  RickAndMortyTests
 //
-//  Created by ULS on 22.06.2022.
-//
+
 
 import XCTest
 @testable import RickAndMorty

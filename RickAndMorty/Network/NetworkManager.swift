@@ -2,8 +2,6 @@
 //  NetworkManager.swift
 //  RickAndMorty
 //
-//  Created by ULS on 22.06.2022.
-//
 
 import Foundation
 
@@ -96,6 +94,10 @@ public class NetworkManager {
     }
     
     func getCharactersByEpisode(selfId:String,episodeUrl:String,completion:@escaping (([Character]?)->Void)){
+        if episodeUrl == "" {
+            completion(nil)
+            return
+        }
         let url = URL(string:episodeUrl)!
         let task:URLSessionDataTask = session.dataTask(with: url, completionHandler: {
             data, responce, error in
